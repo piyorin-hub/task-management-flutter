@@ -21,16 +21,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// タスク一覧画面
-class TaskListPage extends StatelessWidget {
+class TaskListPage extends StatefulWidget {
   const TaskListPage({super.key});
 
-  // 仮データ
-  static final _tasks = [
+  @override
+  State<TaskListPage> createState() => _TaskListPageState();
+}
+
+// タスク一覧画面
+class _TaskListPageState extends State<TaskListPage> {
+  // リストStateを持つ
+  final List<Task> _tasks = [
     Task(title: 'お買い物', priority: 1, memo: '牛乳を買う'),
     Task(title: '仕事', priority: 2, memo: 'プロジェクトを進める'),
     Task(title: '勉強', priority: 3, isDone: true),
   ];
+
+  // タスク追加メソッド
+  void _addTask() {
+    setState(() {
+      _tasks.add(Task(title: '新しいタスク', priority: 1));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +62,10 @@ class TaskListPage extends StatelessWidget {
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addTask,
+        child: const Icon(Icons.add),
       ),
     );
   }
