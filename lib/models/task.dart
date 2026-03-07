@@ -1,13 +1,13 @@
 class Task {
   final String title;
-  final bool isDone;
+  bool isDone;
   final int priority;
-  final String memo;
+  final String? memo;
 
   Task({
     required this.title,
-    required this.isDone,
+    this.isDone = false,
     required this.priority,
-    required this.memo,
+    this.memo,
   });
 }
