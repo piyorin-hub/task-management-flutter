@@ -1,16 +1,14 @@
+import 'models/task.dart';
+
 void main() {
-  // List
-  final List<String> tasks = ['タスク1', 'タスク2', 'タスク3'];
-
-  print(tasks);
-
-  tasks.add('タスク4');
-  tasks.removeAt(0);
-  print(tasks);
-
-  final Map<String, bool> isDone = {'タスク2': false, 'タスク3': true, 'タスク4': false};
-  print(isDone);
-
-  isDone['タスク4'] = true;
-  print(isDone);
+  final Task task = Task(
+    title: 'お買い物',
+    isDone: false,
+    priority: 1,
+    memo: '牛乳を買う',
+  );
+  print('タスク: ${task.title}');
+  print('完了: ${task.isDone}');
+  print('優先度: ${task.priority}');
+  print('メモ: ${task.memo}');
 }
