@@ -16,10 +16,11 @@ void main() async {
   print('タスクを取得します...');
   final tasks = await fetchTasks();
   print('タスクを取得しました: ${tasks.length}件');
-  for (final task in tasks) {
-    print('タスク: ${task.title}');
-    print('完了: ${task.isDone}');
-    print('優先度: ${task.priority}');
-    print('メモ: ${task.memo}');
+
+  final pri1Task = tasks.where((task) => task.priority == 1).toList();
+  for (final task in pri1Task) {
+    print(
+      '${task.title} - ${task.isDone ? '完了' : '未完了'} - ${task.priority} - ${task.memo}',
+    );
   }
 }
