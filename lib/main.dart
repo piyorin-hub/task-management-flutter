@@ -42,7 +42,12 @@ class TaskListPage extends StatelessWidget {
           itemCount: _tasks.length,
           itemBuilder: (context, index) {
             final task = _tasks[index];
-            return TaskCard(task: task);
+            return Column(
+              children: [
+                TaskCard(task: task),
+                const SizedBox(height: 8),
+              ],
+            );
           },
         ),
       ),

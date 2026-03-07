@@ -31,7 +31,8 @@ class TaskCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     task.title,
@@ -42,6 +43,7 @@ class TaskCard extends StatelessWidget {
                       color: task.isDone ? Colors.green : Colors.black,
                     ),
                   ),
+                  Text("優先度: ${task.priority}"),
                 ],
               ),
               if (task.memo != null && task.memo!.isNotEmpty)
