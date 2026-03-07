@@ -28,12 +28,30 @@ class TaskCard extends StatelessWidget {
             color: task.isDone ? Colors.green : Colors.grey,
           ),
           const SizedBox(width: 12),
-          Text(
-            task.title,
-            style: TextStyle(
-              fontWeight: task.isDone ? FontWeight.bold : FontWeight.normal,
-              color: task.isDone ? Colors.green : Colors.black,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    task.title,
+                    style: TextStyle(
+                      fontWeight: task.isDone
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: task.isDone ? Colors.green : Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              if (task.memo != null && task.memo!.isNotEmpty)
+                Text(
+                  task.memo!,
+                  style: TextStyle(
+                    color: task.isDone ? Colors.green : Colors.black,
+                  ),
+                ),
+            ],
           ),
         ],
       ),
