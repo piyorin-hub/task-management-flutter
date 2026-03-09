@@ -25,6 +25,12 @@ class _TaskListPageState extends State<TaskListPage> {
     });
   }
 
+  void _toggleTask(int index) {
+    setState(() {
+      _tasks[index].isDone = !_tasks[index].isDone;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +43,7 @@ class _TaskListPageState extends State<TaskListPage> {
             final task = _tasks[index];
             return Column(
               children: [
-                TaskCard(task: task),
+                TaskCard(task: task, onTap: () => _toggleTask(index)),
                 const SizedBox(height: 8),
               ],
             );
