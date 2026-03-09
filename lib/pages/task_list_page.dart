@@ -1,49 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/task.dart';
+import '../providers/task_provider.dart';
 import '../widgets/task_card.dart';
 
-class TaskListPage extends StatefulWidget {
+class TaskListPage extends ConsumerWidget {
   const TaskListPage({super.key});
 
   @override
-  State<TaskListPage> createState() => _TaskListPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // タスクリストを購読して、変更があったら再描画
+    final tasks = ref.watch(taskProvider);
 
-// タスク一覧画面
-class _TaskListPageState extends State<TaskListPage> {
-  // リストStateを持つ
-  final List<Task> _tasks = [
-    Task(title: 'お買い物', priority: 1, memo: '牛乳を買う'),
-    Task(title: '仕事', priority: 2, memo: 'プロジェクトを進める'),
-    Task(title: '勉強', priority: 3, isDone: true),
-  ];
-
-  // タスク追加メソッド
-  void _addTask() {
-    setState(() {
-      _tasks.add(Task(title: '新しいタスク', priority: 1));
-    });
-  }
-
-  void _toggleTask(int index) {
-    setState(() {
-      _tasks[index].isDone = !_tasks[index].isDone;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('タスク一覧')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.builder(
-          itemCount: _tasks.length,
+          itemCount: tasks.length,
           itemBuilder: (context, index) {
-            final task = _tasks[index];
+            final task = tasks[index];
             return Column(
               children: [
-                TaskCard(task: task, onTap: () => _toggleTask(index)),
+                TaskCard(
+                  task: task,
+                  onTap: () =>
+                      ref.read(taskProvider.notifier).toggleTask(index),
+                ),
                 const SizedBox(height: 8),
               ],
             );
@@ -51,7 +34,9 @@ class _TaskListPageState extends State<TaskListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addTask,
+        onPressed: () => ref
+            .read(taskProvider.notifier)
+            .addTask(Task(title: '新しいタスク', priority: 1)),
         child: const Icon(Icons.add),
       ),
     );
