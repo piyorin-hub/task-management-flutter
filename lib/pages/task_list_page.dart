@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/task.dart';
 import '../providers/task_provider.dart';
 import '../widgets/task_card.dart';
+import '../pages/task_detail_page.dart';
 
 class TaskListPage extends ConsumerWidget {
   const TaskListPage({super.key});
@@ -26,7 +27,13 @@ class TaskListPage extends ConsumerWidget {
                 TaskCard(
                   task: task,
                   onTap: () =>
-                      ref.read(taskProvider.notifier).toggleTask(index),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TaskDetailPage(task: task),
+                    ),
+                  ),
+                      // ref.read(taskProvider.notifier).toggleTask(index),
                 ),
                 const SizedBox(height: 8),
               ],
