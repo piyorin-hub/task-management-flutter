@@ -11,9 +11,10 @@ class TaskListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // タスクリストを購読して、変更があったら再描画
     final tasks = ref.watch(taskProvider);
+    final undoneTaskCount = ref.watch(undoneTaskCountProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('タスク一覧')),
+      appBar: AppBar(title: Text('タスク一覧 未完了：$undoneTaskCount')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.builder(

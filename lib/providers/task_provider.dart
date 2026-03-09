@@ -34,3 +34,8 @@ class TaskNotifier extends StateNotifier<List<Task>> {
 final taskProvider = StateNotifierProvider<TaskNotifier, List<Task>>((ref) {
   return TaskNotifier();
 });
+
+final undoneTaskCountProvider = Provider<int>((ref) {
+  final tasks = ref.watch(taskProvider);
+  return tasks.where((task) => !task.isDone).length;
+});
