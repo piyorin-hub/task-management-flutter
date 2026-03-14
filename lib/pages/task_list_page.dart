@@ -33,7 +33,7 @@ class TaskListPage extends ConsumerWidget {
                       builder: (context) => TaskDetailPage(task: task),
                     ),
                   ),
-                      // ref.read(taskProvider.notifier).toggleTask(index),
+                  onCheckTap: () => ref.read(taskProvider.notifier).toggleTask(index)
                 ),
                 const SizedBox(height: 8),
               ],
