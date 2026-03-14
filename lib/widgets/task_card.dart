@@ -4,8 +4,14 @@ import '../models/task.dart';
 class TaskCard extends StatelessWidget {
   final Task task;
   final VoidCallback? onTap;
+  final VoidCallback? onCheckTap;
 
-  const TaskCard({super.key, required this.task, this.onTap});
+  const TaskCard({
+    super.key, 
+    required this.task, 
+    this.onTap, 
+    this.onCheckTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +32,14 @@ class TaskCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(
-              task.isDone ? Icons.check_circle : Icons.check_circle_outline,
-              color: task.isDone ? Colors.green : Colors.grey,
+            GestureDetector(
+              onTap: onCheckTap,
+              child: Icon(
+                task.isDone 
+                ? Icons.check_circle 
+                : Icons.check_circle_outline,
+                color: task.isDone ? Colors.green : Colors.grey,
+              ),
             ),
             const SizedBox(width: 12),
             Column(
